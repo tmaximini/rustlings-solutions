@@ -16,8 +16,6 @@
 // There are at least two ways to implement this that are both correct-- but
 // one is a lot shorter! Execute `rustlings hint errors2` for hints to both ways.
 
-// I AM NOT DONE
-
 use std::num::ParseIntError;
 
 pub fn total_cost(item_quantity: &str) -> Result<i32, ParseIntError> {
@@ -25,6 +23,18 @@ pub fn total_cost(item_quantity: &str) -> Result<i32, ParseIntError> {
     let cost_per_item = 5;
     let qty = item_quantity.parse::<i32>();
 
+    // using match is one way...
+    // match qty {
+    //     Ok(qty) => Ok(qty * cost_per_item + processing_fee),
+    //     Err(qty) => Err(qty),
+    // }
+
+    // shorter way: ? operator
+
+    /**
+     * he ? placed after a Result value is defined to work in almost the same way as the match expressions we defined to handle the Result values in Listing 9-6. If the value of the Result is an Ok, the value inside the Ok will get returned from this expression, and the program will continue. If the value is an Err, the Err will be returned from the whole function as if we had used the return keyword so the error value gets propagated to the calling code.
+     */
+    let qty = item_quantity.parse::<i32>()?;
     Ok(qty * cost_per_item + processing_fee)
 }
 
