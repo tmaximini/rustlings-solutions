@@ -4,16 +4,18 @@
 // It won't compile right now! Why?
 // Execute `rustlings hint errors5` for hints!
 
-// I AM NOT DONE
-
 use std::error;
+use std::error::Error;
 use std::fmt;
 use std::num::ParseIntError;
 
 // TODO: update the return type of `main()` to make this compile.
-fn main() -> Result<(), ParseIntError> {
+
+// https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html#the--operator-can-be-used-in-functions-that-return-result
+fn main() -> Result<(), Box<dyn Error>> {
     let pretend_user_input = "42";
     let x: i64 = pretend_user_input.parse()?;
+
     println!("output={:?}", PositiveNonzeroInteger::new(x)?);
     Ok(())
 }
@@ -34,7 +36,7 @@ impl PositiveNonzeroInteger {
         match value {
             x if x < 0 => Err(CreationError::Negative),
             x if x == 0 => Err(CreationError::Zero),
-            x => Ok(PositiveNonzeroInteger(x as u64))
+            x => Ok(PositiveNonzeroInteger(x as u64)),
         }
     }
 }
