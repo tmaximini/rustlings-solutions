@@ -10,8 +10,6 @@
 
 // Execute 'rustlings hint generics3' for hints!
 
-// I AM NOT DONE
-
 pub struct ReportCard<E> {
     pub grade: E,
     pub student_name: String,
